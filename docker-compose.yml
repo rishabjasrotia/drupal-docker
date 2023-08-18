@@ -23,7 +23,9 @@ services:
       - "8080:80"
 
   drupal-fpm:
-    image: drupal:10.0.10-php8.2-fpm-alpine3.18
+    build:
+      context: .
+      dockerfile: iac/docker/php/Dockerfile
     container_name: drupal-fpm
     depends_on:
       - mysql
@@ -44,7 +46,7 @@ services:
       - 80:80
     volumes:
       - ./app:/var/www/html
-      - ./docker/nginx-conf:/etc/nginx/conf.d
+      - ./iac/docker/nginx-conf:/etc/nginx/conf.d
     networks:
       - external
 

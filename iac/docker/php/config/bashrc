@@ -1,0 +1,2 @@
+alias ll='ls -al --time-style="+%Y-%m-%dT%H:%M:%S"'
+
