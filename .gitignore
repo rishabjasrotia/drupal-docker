@@ -1,2 +1,4 @@
 app/web/core/*
+app/web/modules/contrib/*
 app/vendor/*
+app/web/sites/default/files/*

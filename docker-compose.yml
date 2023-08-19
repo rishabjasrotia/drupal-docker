@@ -11,6 +11,8 @@ services:
       - db-data:/var/lib/mysql
     networks:
       - internal
+    ports:
+      - "3306:3306"
 
   phpmyadmin:
     image: phpmyadmin/phpmyadmin:latest
