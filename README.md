@@ -1,4 +1,4 @@
-![image](https://github.com/rishabjasrotia/d10docker/assets/33950743/798fd14f-90df-47f7-aa62-24b18b928b61)Docker Base Drupal 10 Setup
+Docker Base Drupal 10 Setup
 
 ## How to setup
 - Build the docker image using following command ```docker compose up -d```
