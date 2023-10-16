@@ -127,12 +127,7 @@ RUN echo "source .bashrc" >> /var/www/.profile ;\
 # Connect as web by default
 RUN echo 'su web' >> /root/.bashrc
 
-# Set and run a custom entrypoint
-COPY ./iac/docker/php/core/docker-php-entrypoint /usr/local/bin/
-RUN chmod +x /usr/local/bin/docker-php-entrypoint
-
 VOLUME /var/www/html
 
-ENTRYPOINT ["docker-php-entrypoint"]
 EXPOSE 9000
 CMD ["php-fpm"]
