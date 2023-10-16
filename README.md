@@ -1,4 +1,4 @@
-Docker Base Drupal 10 Setup
+Docker Base Drupal 10 Container Setup
 
 ## How to setup
 - Build the docker image using following command ```docker compose up -d```
