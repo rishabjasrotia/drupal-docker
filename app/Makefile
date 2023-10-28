@@ -1,5 +1,4 @@
 build-drupal:
-  source
 	composer install
 	./vendor/bin/drush cr
   drupal-install
