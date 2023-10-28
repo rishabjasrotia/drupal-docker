@@ -88,16 +88,7 @@
  * ];
  * @endcode
  */
-// $databases['default']['default'] = [
-//   'database' => 'drupal',
-//   'username' => 'drupal_database_user',
-//   'password' => 'drupal_database_password',
-//   'host' => 'host.docker.internal',
-//   'port' => '3306',
-//   'driver' => 'mysql',
-//   'prefix' => '',
-//   'collation' => 'utf8mb4_general_ci',
-// ];
+
 /**
  * Customizing database settings.
  *
@@ -881,3 +872,7 @@ $databases['default']['default'] = array (
   'autoload' => 'core/modules/mysql/src/Driver/Database/mysql/',
 );
 $settings['config_sync_directory'] = 'sites/default/files/config_L8cBdkN5yiy5qiykKnIKQVA3yotLNCXBUu1glcCOuQFRYpX61xhHK_LiNVcg-8L_mPW9OadMiw/sync';
+
+if (file_exists($app_root . '/' . $site_path . '/settings.local.php')) {
+  include $app_root . '/' . $site_path . '/settings.local.php';
+}

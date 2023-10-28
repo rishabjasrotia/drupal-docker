@@ -25,9 +25,7 @@ services:
       - "8080:80"
 
   drupal-fpm:
-    build:
-      context: .
-      dockerfile: iac/docker/php/Dockerfile
+    image: rishabgit/drupal-docker:php-fpm
     container_name: drupal-fpm
     env_file: .env
     depends_on:
