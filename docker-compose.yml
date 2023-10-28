@@ -29,6 +29,7 @@ services:
       context: .
       dockerfile: iac/docker/php/Dockerfile
     container_name: drupal-fpm
+    env_file: .env
     depends_on:
       - mysql
     restart: unless-stopped

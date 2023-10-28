@@ -88,16 +88,16 @@
  * ];
  * @endcode
  */
-$databases['default']['default'] = [
-  'database' => 'drupal',
-  'username' => 'drupal_database_user',
-  'password' => 'drupal_database_password',
-  'host' => 'host.docker.internal',
-  'port' => '3306',
-  'driver' => 'mysql',
-  'prefix' => '',
-  'collation' => 'utf8mb4_general_ci',
-];
+// $databases['default']['default'] = [
+//   'database' => 'drupal',
+//   'username' => 'drupal_database_user',
+//   'password' => 'drupal_database_password',
+//   'host' => 'host.docker.internal',
+//   'port' => '3306',
+//   'driver' => 'mysql',
+//   'prefix' => '',
+//   'collation' => 'utf8mb4_general_ci',
+// ];
 /**
  * Customizing database settings.
  *
