@@ -1,0 +1,16 @@
+apiVersion: v1
+data:
+  DB_URL: mysql://drupal_database_user:drupal_database_password@host.docker.internal/drupal
+  DRUPAL_PASSWORD: admin
+  DRUPAL_USER: admin
+  MYSQL_DATABASE: drupal
+  MYSQL_PASSWORD: drupal_database_password
+  MYSQL_ROOT_PASSWORD: root_password
+  MYSQL_USER: drupal_database_user
+  SITE_NAME: Drupal10
+kind: ConfigMap
+metadata:
+  creationTimestamp: null
+  labels:
+    io.kompose.service: drupal-fpm-env
+  name: env
