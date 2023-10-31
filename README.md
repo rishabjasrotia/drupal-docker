@@ -1,3 +1,4 @@
+
 **Docker Base Drupal 10 Container Setup**
 
 ## How to setup
@@ -11,5 +12,11 @@
 
 ## Post Installation
 
-- How to fix the config sync site uuid => Export the current site uuid ```./vendor/bin/drush config-get "system.site" uuid``` 
-- Replace the **exported uuid** with the value in `app/config/sync/system.site.yml` **uuid**
+ - Fix Site UUID:
+	 - How to fix the config sync site uuid => Export the current site uuid ```./vendor/bin/drush config-get "system.site" uuid``` 
+	 - Replace the **exported uuid** with the value in `app/config/sync/system.site.yml` **uuid**
+- Fix the Shortcut link and Default:
+	- Go to => Home > Administration > Configuration > User interface > Shortcuts (admin/config/user-interface/shortcut), than in "List links" of "Default"
+	- Delete every shortcut.
+	- Rebuild Drupal Cache.
+
