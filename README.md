@@ -20,3 +20,8 @@
 	- Delete every shortcut.
 	- Rebuild Drupal Cache.
 
+
+## Kubernetes MiniKube
+
+- Kubectl apply -f iac/docker/helm
+- minikube service ngnix --url  
