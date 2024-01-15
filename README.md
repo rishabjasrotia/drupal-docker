@@ -23,5 +23,6 @@
 
 ## Kubernetes MiniKube
 
-- Kubectl apply -f iac/docker/helm
-- minikube service ngnix --url  
+- Kubectl apply -f iac/docker/helm && Kubectl apply -f iac/docker/helm/nginx && Kubectl apply -f iac/docker/drupal && Kubectl apply -f iac/docker/mysql 
+- Add domain to local host i.e. /etc/host file
+- minikube tunnel
