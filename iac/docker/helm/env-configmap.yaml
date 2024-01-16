@@ -8,7 +8,7 @@ data:
   MYSQL_ROOT_PASSWORD: root_password
   MYSQL_USER: drupal_database_user
   SITE_NAME: Drupal10
-  K8S: "1"
+  KS: "1"
 kind: ConfigMap
 metadata:
   creationTimestamp: null
