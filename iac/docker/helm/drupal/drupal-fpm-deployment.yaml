@@ -68,6 +68,11 @@ spec:
                 configMapKeyRef:
                   key: SITE_NAME
                   name: env
+            - name: KS
+              valueFrom:
+                configMapKeyRef:
+                  key: KS
+                  name: env
           image: rishabgit/drupal-docker:php-fpm
           name: drupal-fpm
           resources: {}
