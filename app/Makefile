@@ -1,4 +1,4 @@
-build-drupal: build-composer drupal-install
+build-drupal: build-composer drupal-install fix-permissions
 
 build-composer:
 	composer install

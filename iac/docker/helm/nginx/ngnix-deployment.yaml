@@ -32,17 +32,5 @@ spec:
           ports:
             - containerPort: 80
           resources: {}
-          volumeMounts:
-            - mountPath: /var/www/html
-              name: ngnix-claim0
-            - mountPath: /etc/nginx/conf.d
-              name: ngnix-claim1
       restartPolicy: Always
-      volumes:
-        - name: ngnix-claim0
-          persistentVolumeClaim:
-            claimName: ngnix-claim0
-        - name: ngnix-claim1
-          persistentVolumeClaim:
-            claimName: ngnix-claim1
 status: {}
