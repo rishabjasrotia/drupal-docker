@@ -25,6 +25,7 @@ spec:
         io.kompose.network/external: "true"
         io.kompose.network/internal: "true"
         io.kompose.service: drupal-fpm
+        app: drupal-fpm
     spec:
       containers:
         - env:

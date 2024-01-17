@@ -24,6 +24,7 @@ spec:
       labels:
         io.kompose.network/external: "true"
         io.kompose.service: ngnix
+        app: ngnix
     spec:
       containers:
         - image: nginx:alpine-perl

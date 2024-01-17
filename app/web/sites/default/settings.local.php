@@ -5,7 +5,7 @@ $config['system.performance']['js']['preprocess'] = FALSE;
 
 $settings['config_sync_directory'] = '../config/sync';
 
-if (getenv('K8S') == '1') {
+if (getenv('KS') == '1') {
     $databases['default']['default'] = [
         'database' => 'drupal',
         'username' => 'drupal_database_user',

@@ -1,5 +1,5 @@
 
-**Docker Base Drupal 10 Container Setup**
+**Docker Base Drupal 10 Container Setup with Kubernetes Support**
 
 ## How to setup
 - Build the setup using following command ```make build```
@@ -23,6 +23,15 @@
 
 ## Kubernetes MiniKube
 
-- Kubectl apply -f iac/docker/helm && Kubectl apply -f iac/docker/helm/nginx && Kubectl apply -f iac/docker/drupal && Kubectl apply -f iac/docker/mysql 
-- Add domain to local host i.e. /etc/host file
-- minikube tunnel
+- Build Minikube Helm Files:
+	- ```make build-minikube```
+- Deploy code to minkube containers:
+	- ```make deploy-minikube```
+- Run Minikube Tunnel and expose Nginx container port:
+	- ```make build-tunnel```
+	- ```make run-minikube```
+- Add domain to local host i.e. ```/etc/host``` file
+
+## Post Deployment to minikube 
+- We can use following command to just update drupal & nginx containers files:
+	- ```make update-minikube```
