@@ -1,0 +1,14 @@
+#!/bin/bash
+
+POD=$(kubectl get pods -l app=drupal-fpm -o custom-columns=:metadata.name)
+echo $POD
+kubectl exec $POD -- /bin/sh -c "rm -rf /var/www/html/*"
+kubectl cp app/ $POD:/var/www/html/ -c drupal-fpm -n default 
+kubectl exec $POD -- bash -c "mv /var/www/html/app/* /var/www/html/."
+kubectl exec $POD -- bash -c "cd /var/www/html && make drupal-update"
+
+POD=$(kubectl get pods -l app=ngnix -o custom-columns=:metadata.name)
+echo $POD
+kubectl exec $POD -- /bin/sh -c "rm -rf /var/www/html/*"
+kubectl cp app/ $POD:/var/www/html/ -c ngnix -n default 
+kubectl exec $POD -- /bin/sh -c "mv /var/www/html/app/* /var/www/html/."
