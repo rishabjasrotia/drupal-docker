@@ -1,6 +1,11 @@
 
 **Docker Base Drupal 10 Container Setup with Kubernetes Support**
 
+## Support
+- AWS EKS
+- Minkube
+
+
 ## How to setup
 - Build the setup using following command ```make build```
 - Execute the Drupal container ```docker exec -it drupal-fpm sh```
