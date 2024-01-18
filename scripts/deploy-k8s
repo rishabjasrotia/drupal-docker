@@ -9,6 +9,8 @@ kubectl exec $POD -- bash -c "cd /var/www/html && make build-drupal"
 
 POD=$(kubectl get pods -l app=ngnix -o custom-columns=:metadata.name)
 echo $POD
+kubectl exec $POD -- /bin/sh -c " mkdir -p /var/www/html"
+kubectl cp /iac/docker/nginx-conf/nginx.conf $POD:/etc/nginx/conf.d -c ngnix -n default 
 kubectl exec $POD -- /bin/sh -c "rm -rf /var/www/html/*"
 kubectl cp app/ $POD:/var/www/html/ -c ngnix -n default 
 kubectl exec $POD -- /bin/sh -c "mv /var/www/html/app/* /var/www/html/."
