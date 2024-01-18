@@ -77,12 +77,5 @@ spec:
           image: rishabgit/drupal-docker:php-fpm
           name: drupal-fpm
           resources: {}
-          volumeMounts:
-            - mountPath: /var/www/html
-              name: drupal-fpm-claim0
       restartPolicy: Always
-      volumes:
-        - name: drupal-fpm-claim0
-          persistentVolumeClaim:
-            claimName: drupal-fpm-claim0
 status: {}

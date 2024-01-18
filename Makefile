@@ -4,10 +4,11 @@ build:
 
 build-minikube:
 	minikube start
-	Kubectl apply -f iac/docker/helm
-	Kubectl apply -f iac/docker/helm/nginx
-	Kubectl apply -f iac/docker/helm/drupal
-	Kubectl apply -f iac/docker/helm/mysql
+	kubectl apply -f iac/docker/helm
+	kubectl apply -f iac/docker/helm/nginx
+	kubectl apply -f iac/docker/helm/drupal
+	kubectl apply -f iac/docker/helm/mysql
+	kubectl apply -f iac/docker/helm/phpmyadmin
 
 build-tunnel:
 	minikube tunnel
