@@ -22,4 +22,4 @@ deploy-minikube:
 
 update-minikube:
 	cd app && composer install && cd ..
-	chmod +x scripts/deploy-k8s && scripts/deploy-k8s
+	chmod +x scripts/update-k8s && scripts/update-k8s
