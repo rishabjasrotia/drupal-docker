@@ -54,12 +54,22 @@ Steps to follow:
     kubectl apply -f iac/docker/helm/drupal
     kubectl apply -f iac/docker/helm/nginx
     ```
-7. Composer Install & copy files to containers
+7. Make /var/www/html path in ngnix container
+    ```
+    kubectl exec -it ngnix-6978c9db6f-7rthm  -- /bin/sh 
+
+    mkdir -p /var/www/html    
+    ```
+8. Composer Install & copy files to containers
     ```
     composer install
     chmod +x scripts/deploy-k8s && scripts/deploy-k8s
     ```
-8. Expose External IP
+9. Copy nginx.conf to nginx container 
+    ```
+    kubectl cp iac/docker/nginx-conf/ ngnix-6978c9db6f-7rthm:/etc/nginx/conf.d/ -c ngnix -n default 
+    ```
+10. Expose External IP
     ```
     kubectl expose deployment ngnix --type=LoadBalancer --name=ngnix-expose
 
@@ -75,6 +85,6 @@ Steps to follow:
     phpmyadmin     ClusterIP      XX.XX.174.52    <none>                                                                    8080/TCP       20m
     [cloudshell-user@ip-XX-XX-40-248 drupal-docker]$ 
     ```
-9. Visit your public IP i.e. b54896f17b3a644698d9ee63a41a17dc-378462229.ap-south-1.elb.amazonaws.com
+11. Visit your public IP i.e. b54896f17b3a644698d9ee63a41a17dc-378462229.ap-south-1.elb.amazonaws.com
 
 
