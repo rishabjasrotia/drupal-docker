@@ -7,6 +7,9 @@ Prerequisite:
 - IAM role has Administrator Access Permission.
 
 Steps to follow:
+
+
+# Manually Creation of EKS
 1. Create AWS EKS Cluster i.e. https://docs.aws.amazon.com/eks/latest/userguide/create-cluster.html
 2. Create Node Role i.e https://docs.aws.amazon.com/eks/latest/userguide/create-node-role.html
   - Run the following command to create the node-role-trust-relationship.json file.
@@ -40,13 +43,18 @@ Steps to follow:
       --role-name AmazonEKSNodeRole
     ```
 3. Create Node Groups i.e. https://docs.aws.amazon.com/eks/latest/userguide/create-managed-node-group.html
-4. Connect to AWS eks
+
+# [Terraform Creation of EKS](iac/terraform/aws/HOW_TO.md)
+
+# Code Deployment to eks cluster 
+
+1. Connect to AWS eks
     ```
     aws eks --region <region> update-kubeconfig --name <cluster_name>
     aws eks --region ap-south-1 update-kubeconfig --name artworks
     ```
-5. Clone the code to AWS CLI or Local terminal ```git checkout aws-k8s```
-6. Apply helm files
+2. Clone the code to AWS CLI or Local terminal ```git checkout aws-k8s```
+3. Apply helm files
     ```
     kubectl apply -f iac/docker/helm
     kubectl apply -f iac/docker/helm/phpmyadmin
@@ -54,22 +62,22 @@ Steps to follow:
     kubectl apply -f iac/docker/helm/drupal
     kubectl apply -f iac/docker/helm/nginx
     ```
-7. Make /var/www/html path in ngnix container
+4. Make /var/www/html path in ngnix container
     ```
     kubectl exec -it ngnix-6978c9db6f-7rthm  -- /bin/sh 
 
     mkdir -p /var/www/html    
     ```
-8. Composer Install & copy files to containers
+5. Composer Install & copy files to containers
     ```
     composer install
     chmod +x scripts/deploy-k8s && scripts/deploy-k8s
     ```
-9. Copy nginx.conf to nginx container 
+6. Copy nginx.conf to nginx container 
     ```
     kubectl cp iac/docker/nginx-conf/ ngnix-6978c9db6f-7rthm:/etc/nginx/conf.d/ -c ngnix -n default 
     ```
-10. Expose External IP
+7. Expose External IP
     ```
     kubectl expose deployment ngnix --type=LoadBalancer --name=ngnix-expose
 
@@ -85,6 +93,6 @@ Steps to follow:
     phpmyadmin     ClusterIP      XX.XX.174.52    <none>                                                                    8080/TCP       20m
     [cloudshell-user@ip-XX-XX-40-248 drupal-docker]$ 
     ```
-11. Visit your public IP i.e. b54896f17b3a644698d9ee63a41a17dc-378462229.ap-south-1.elb.amazonaws.com
+8. Visit your public IP i.e. b54896f17b3a644698d9ee63a41a17dc-378462229.ap-south-1.elb.amazonaws.com
 
 
