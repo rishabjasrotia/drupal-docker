@@ -8,6 +8,7 @@ Prerequisite:
 
 Steps to follow:
 
+# [Terraform Creation of EKS](iac/terraform/aws/HOW_TO.md)
 
 # Manually Creation of EKS
 1. Create AWS EKS Cluster i.e. https://docs.aws.amazon.com/eks/latest/userguide/create-cluster.html
@@ -43,8 +44,6 @@ Steps to follow:
       --role-name AmazonEKSNodeRole
     ```
 3. Create Node Groups i.e. https://docs.aws.amazon.com/eks/latest/userguide/create-managed-node-group.html
-
-# [Terraform Creation of EKS](iac/terraform/aws/HOW_TO.md)
 
 # Code Deployment to eks cluster 
 
