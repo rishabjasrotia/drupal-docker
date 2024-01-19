@@ -2,7 +2,7 @@
 **Docker Base Drupal 10 Container Setup with Kubernetes Support**
 
 ## Support
-- (AWS EKS)[HOW_TO_AWS_EKS.md]
+- [AWS EKS](HOW_TO_AWS_EKS.md)
 - Minkube
 
 
