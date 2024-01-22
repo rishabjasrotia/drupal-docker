@@ -1,0 +1,38 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ngnix
+  labels:
+    io.kompose.service: ngnix
+  {{- include "ngnix.labels" . | nindent 4 }}
+  annotations:
+    kompose.cmd: kompose convert
+    kompose.version: 1.26.0 (40646f47)
+spec:
+  replicas: {{ .Values.ngnix.replicas }}
+  selector:
+    matchLabels:
+      io.kompose.service: ngnix
+    {{- include "ngnix.selectorLabels" . | nindent 6 }}
+  template:
+    metadata:
+      labels:
+        app: ngnix
+        io.kompose.network/external: "true"
+        io.kompose.service: ngnix
+      {{- include "ngnix.selectorLabels" . | nindent 8 }}
+      annotations:
+        kompose.cmd: kompose convert
+        kompose.version: 1.26.0 (40646f47)
+    spec:
+      containers:
+      - env:
+        - name: KUBERNETES_CLUSTER_DOMAIN
+          value: {{ quote .Values.kubernetesClusterDomain }}
+        image: {{ .Values.ngnix.ngnix.image.repository }}:{{ .Values.ngnix.ngnix.image.tag
+          | default .Chart.AppVersion }}
+        name: ngnix
+        ports:
+        - containerPort: 80
+        resources: {}
+      restartPolicy: Always

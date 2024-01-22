@@ -1,0 +1,42 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: phpmyadmin
+  labels:
+    io.kompose.service: phpmyadmin
+  {{- include "phpmyadmin.labels" . | nindent 4 }}
+  annotations:
+    kompose.cmd: kompose convert
+    kompose.version: 1.26.0 (40646f47)
+spec:
+  replicas: {{ .Values.phpmyadmin.replicas }}
+  selector:
+    matchLabels:
+      io.kompose.service: phpmyadmin
+    {{- include "phpmyadmin.selectorLabels" . | nindent 6 }}
+  template:
+    metadata:
+      labels:
+        io.kompose.service: phpmyadmin
+      {{- include "phpmyadmin.selectorLabels" . | nindent 8 }}
+      annotations:
+        kompose.cmd: kompose convert
+        kompose.version: 1.26.0 (40646f47)
+    spec:
+      containers:
+      - env:
+        - name: PMA_HOST
+          value: {{ quote .Values.phpmyadmin.phpmyadmin.env.pmaHost }}
+        - name: PMA_PASSWORD
+          value: {{ quote .Values.phpmyadmin.phpmyadmin.env.pmaPassword }}
+        - name: PMA_USER
+          value: {{ quote .Values.phpmyadmin.phpmyadmin.env.pmaUser }}
+        - name: KUBERNETES_CLUSTER_DOMAIN
+          value: {{ quote .Values.kubernetesClusterDomain }}
+        image: {{ .Values.phpmyadmin.phpmyadmin.image.repository }}:{{ .Values.phpmyadmin.phpmyadmin.image.tag
+          | default .Chart.AppVersion }}
+        name: phpmyadmin
+        ports:
+        - containerPort: 80
+        resources: {}
+      restartPolicy: Always

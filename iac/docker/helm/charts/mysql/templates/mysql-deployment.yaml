@@ -1,0 +1,78 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mysql
+  labels:
+    io.kompose.service: mysql
+  {{- include "mysql.labels" . | nindent 4 }}
+  annotations:
+    kompose.cmd: kompose convert
+    kompose.version: 1.26.0 (40646f47)
+spec:
+  replicas: {{ .Values.mysql.replicas }}
+  selector:
+    matchLabels:
+      io.kompose.service: mysql
+    {{- include "mysql.selectorLabels" . | nindent 6 }}
+  template:
+    metadata:
+      labels:
+        io.kompose.network/internal: "true"
+        io.kompose.service: mysql
+      {{- include "mysql.selectorLabels" . | nindent 8 }}
+      annotations:
+        kompose.cmd: kompose convert
+        kompose.version: 1.26.0 (40646f47)
+    spec:
+      containers:
+      - args: {{- toYaml .Values.mysql.mysql.args | nindent 8 }}
+        env:
+        - name: DB_URL
+          valueFrom:
+            configMapKeyRef:
+              key: DB_URL
+              name: env
+        - name: DRUPAL_PASSWORD
+          valueFrom:
+            configMapKeyRef:
+              key: DRUPAL_PASSWORD
+              name: env
+        - name: DRUPAL_USER
+          valueFrom:
+            configMapKeyRef:
+              key: DRUPAL_USER
+              name: env
+        - name: MYSQL_DATABASE
+          valueFrom:
+            configMapKeyRef:
+              key: MYSQL_DATABASE
+              name: env
+        - name: MYSQL_PASSWORD
+          valueFrom:
+            configMapKeyRef:
+              key: MYSQL_PASSWORD
+              name: env
+        - name: MYSQL_ROOT_PASSWORD
+          valueFrom:
+            configMapKeyRef:
+              key: MYSQL_ROOT_PASSWORD
+              name: env
+        - name: MYSQL_USER
+          valueFrom:
+            configMapKeyRef:
+              key: MYSQL_USER
+              name: env
+        - name: SITE_NAME
+          valueFrom:
+            configMapKeyRef:
+              key: SITE_NAME
+              name: env
+        - name: KUBERNETES_CLUSTER_DOMAIN
+          value: {{ quote .Values.kubernetesClusterDomain }}
+        image: {{ .Values.mysql.mysql.image.repository }}:{{ .Values.mysql.mysql.image.tag
+          | default .Chart.AppVersion }}
+        name: mysql
+        ports:
+        - containerPort: 3306
+        resources: {}
+      restartPolicy: Always

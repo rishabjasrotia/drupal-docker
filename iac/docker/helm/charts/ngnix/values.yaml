@@ -1,0 +1,11 @@
+kubernetesClusterDomain: cluster.local
+ngnix:
+  ngnix:
+    image:
+      repository: nginx
+      tag: alpine-perl
+  ports:
+  - port: 80
+    targetPort: 80
+  replicas: 1
+  type: LoadBalancer

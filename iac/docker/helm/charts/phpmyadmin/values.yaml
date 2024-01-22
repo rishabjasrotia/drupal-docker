@@ -1,0 +1,16 @@
+kubernetesClusterDomain: cluster.local
+phpmyadmin:
+  phpmyadmin:
+    env:
+      pmaHost: mysql
+      pmaPassword: root_password
+      pmaUser: root
+    image:
+      repository: phpmyadmin/phpmyadmin
+      tag: latest
+  ports:
+  - name: "8080"
+    port: 8080
+    targetPort: 80
+  replicas: 1
+  type: ClusterIP
