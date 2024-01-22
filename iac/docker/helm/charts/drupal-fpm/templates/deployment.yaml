@@ -1,0 +1,82 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "drupal-fpm.fullname" . }}
+  labels:
+    io.kompose.service: drupal-fpm
+  {{- include "drupal-fpm.labels" . | nindent 4 }}
+  annotations:
+    kompose.cmd: kompose convert
+    kompose.version: 1.26.0 (40646f47)
+spec:
+  replicas: {{ .Values.drupalFpm.replicas }}
+  selector:
+    matchLabels:
+      io.kompose.service: drupal-fpm
+    {{- include "drupal-fpm.selectorLabels" . | nindent 6 }}
+  template:
+    metadata:
+      labels:
+        app: drupal-fpm
+        io.kompose.network/external: "true"
+        io.kompose.network/internal: "true"
+        io.kompose.service: drupal-fpm
+      {{- include "drupal-fpm.selectorLabels" . | nindent 8 }}
+      annotations:
+        kompose.cmd: kompose convert
+        kompose.version: 1.26.0 (40646f47)
+    spec:
+      containers:
+      - env:
+        - name: DB_URL
+          valueFrom:
+            configMapKeyRef:
+              key: DB_URL
+              name: env
+        - name: DRUPAL_PASSWORD
+          valueFrom:
+            configMapKeyRef:
+              key: DRUPAL_PASSWORD
+              name: env
+        - name: DRUPAL_USER
+          valueFrom:
+            configMapKeyRef:
+              key: DRUPAL_USER
+              name: env
+        - name: MYSQL_DATABASE
+          valueFrom:
+            configMapKeyRef:
+              key: MYSQL_DATABASE
+              name: env
+        - name: MYSQL_PASSWORD
+          valueFrom:
+            configMapKeyRef:
+              key: MYSQL_PASSWORD
+              name: env
+        - name: MYSQL_ROOT_PASSWORD
+          valueFrom:
+            configMapKeyRef:
+              key: MYSQL_ROOT_PASSWORD
+              name: env
+        - name: MYSQL_USER
+          valueFrom:
+            configMapKeyRef:
+              key: MYSQL_USER
+              name: env
+        - name: SITE_NAME
+          valueFrom:
+            configMapKeyRef:
+              key: SITE_NAME
+              name: env
+        - name: KS
+          valueFrom:
+            configMapKeyRef:
+              key: KS
+              name: env
+        - name: KUBERNETES_CLUSTER_DOMAIN
+          value: {{ quote .Values.kubernetesClusterDomain }}
+        image: {{ .Values.drupalFpm.drupalFpm.image.repository }}:{{ .Values.drupalFpm.drupalFpm.image.tag
+          | default .Chart.AppVersion }}
+        name: drupal-fpm
+        resources: {}
+      restartPolicy: Always

@@ -1,0 +1,20 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: {{ include "ngnix.fullname" . }}-ingress
+  labels:
+  {{- include "ngnix.labels" . | nindent 4 }}
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /$1
+spec:
+  rules:
+  - host: drupal-local.info
+    http:
+      paths:
+      - backend:
+          service:
+            name: '{{ include "ngnix.fullname" . }}-ngnix'
+            port:
+              number: 8080
+        path: /
+        pathType: Prefix

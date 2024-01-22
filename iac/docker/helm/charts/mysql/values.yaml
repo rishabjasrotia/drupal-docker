@@ -1,0 +1,14 @@
+kubernetesClusterDomain: cluster.local
+mysql:
+  mysql:
+    args:
+    - --default-authentication-plugin=mysql_native_password
+    image:
+      repository: mysql
+      tag: "8.0"
+  ports:
+  - name: "3306"
+    port: 3306
+    targetPort: 3306
+  replicas: 1
+  type: ClusterIP
