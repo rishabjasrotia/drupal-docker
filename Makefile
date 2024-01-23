@@ -5,10 +5,10 @@ build:
 build-minikube:
 	minikube start
 	kubectl apply -f iac/docker/helm
-	kubectl apply -f iac/docker/helm/nginx
-	kubectl apply -f iac/docker/helm/drupal
-	kubectl apply -f iac/docker/helm/mysql
-	kubectl apply -f iac/docker/helm/phpmyadmin
+	helm install ngnix iac/docker/helm/charts/ngnix/ --values iac/docker/helm/charts/ngnix/values.yaml
+	helm install drupal-fpm iac/docker/helm/charts/drupal-fpm/ --values iac/docker/helm/charts/drupal-fpm/values.yaml
+	helm install mysql iac/docker/helm/charts/mysql/ --values iac/docker/helm/charts/mysql/values.yaml
+	helm install phpmyadmin iac/docker/helm/charts/phpmyadmin/ --values iac/docker/helm/charts/phpmyadmin/values.yaml
 
 build-tunnel:
 	minikube tunnel
