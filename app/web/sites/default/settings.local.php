@@ -3,7 +3,7 @@
 $config['system.performance']['css']['preprocess'] = FALSE;
 $config['system.performance']['js']['preprocess'] = FALSE;
 
-$settings['config_sync_directory'] = '../config/sync';
+$settings['config_sync_directory'] = '/var/www/html/config/sync';
 
 if (getenv('KS') == '1') {
     $databases['default']['default'] = [

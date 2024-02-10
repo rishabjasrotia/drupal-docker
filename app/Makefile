@@ -6,6 +6,7 @@ build-composer:
 drupal-install:
 	./vendor/bin/drush site-install standard --db-url="$${DB_URL}" --site-name="$${SITE_NAME}" --account-name="$${DRUPAL_USER}" --account-pass="$${DRUPAL_PASSWORD}" -y \
 	  --verbose;
+	./vendor/bin/drush cex -y;
 
 fix-permissions:
 	chown -R www-data:www-data web/sites/default/files

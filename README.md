@@ -32,8 +32,7 @@
 	- ```make build-minikube```
 - Deploy code to minkube containers:
 	- ```make deploy-minikube```
-- Run Minikube Tunnel and expose Nginx container port:
-	- ```make build-tunnel```
+- Expose Nginx container port:
 	- ```make run-minikube```
 - Add domain to local host i.e. ```/etc/host``` file
 

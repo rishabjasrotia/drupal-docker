@@ -5,7 +5,7 @@ echo $POD
 kubectl exec $POD -- /bin/sh -c "rm -rf /var/www/html/*"
 kubectl cp app/ $POD:/var/www/html/ -c drupal-fpm -n default 
 kubectl exec $POD -- bash -c "mv /var/www/html/app/* /var/www/html/."
-kubectl exec $POD -- bash -c "cd /var/www/html && make drupal-update"
+kubectl exec $POD -- bash -c "cd /var/www/html && make fix-permissions && make drupal-update"
 
 POD=$(kubectl get pods -l app=ngnix -o custom-columns=:metadata.name)
 echo $POD
